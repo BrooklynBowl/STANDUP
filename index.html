@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Стендапы · Brooklyn Bowl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#E8E5DE; --white:#FFFFFF; --ink:#191919; --red:#FF2026;
+  --line:rgba(25,25,25,.14); --mute:rgba(25,25,25,.55);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 64px}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.ball{width:34px;height:34px;border-radius:50%;background:var(--red);position:relative;flex:0 0 auto}
+.ball i{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--cream)}
+.ball i:nth-child(1){top:9px;left:10px}
+.ball i:nth-child(2){top:9px;left:19px}
+.ball i:nth-child(3){top:17px;left:14px}
+.top h1{font-family:Oswald,sans-serif;font-weight:500;font-size:26px;letter-spacing:.02em;margin:0;line-height:1}
+.top .sub{color:var(--mute);font-size:13px;margin-top:2px}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn{background:var(--white);border:1px solid var(--line);border-radius:800px;padding:8px 16px;color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+.btn-red{background:var(--red);border-color:var(--red);color:var(--white)}
+
+.controls{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end;
+  background:var(--white);border-radius:16px;padding:16px 18px;margin-bottom:22px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12px;color:var(--mute)}
+select{font-family:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);
+  border-radius:800px;background:var(--cream);color:var(--ink);min-width:170px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--cream);border-radius:800px;padding:7px 14px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:26px}
+.tile{background:var(--white);border-radius:16px;padding:15px 16px}
+.tile .name{font-size:13px;color:var(--mute);margin-bottom:8px}
+.tile .val{font-family:Oswald,sans-serif;font-size:28px;font-weight:500;
+  font-variant-numeric:tabular-nums;line-height:1}
+.tile .per{font-size:12px;color:var(--mute);margin-top:6px}
+.tile.alarm .val{color:var(--red)}
+
+.groupname{font-family:Oswald,sans-serif;font-weight:500;font-size:17px;
+  margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.groupname:first-child{margin-top:0}
+.groupname s{flex:1;height:1px;background:var(--line);text-decoration:none}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--white);border-radius:16px;padding:16px 17px;display:flex;flex-direction:column;gap:11px}
+.card .when{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.card .date{font-size:13px;color:var(--mute)}
+.card .left{font-size:13px;font-weight:500;white-space:nowrap}
+.card .left.soon{color:var(--red)}
+.card h3{font-family:Oswald,sans-serif;font-weight:500;font-size:21px;margin:0;line-height:1.15}
+.card .place{font-size:13px;color:var(--mute);margin-top:-6px}
+
+.bar{height:7px;border-radius:800px;background:var(--cream);overflow:hidden}
+.bar span{display:block;height:100%;background:var(--red);border-radius:800px}
+.bar.full span{background:var(--ink)}
+
+.nums{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.num{display:flex;flex-direction:column;gap:1px}
+.num b{font-family:Oswald,sans-serif;font-weight:500;font-size:24px;line-height:1;
+  font-variant-numeric:tabular-nums}
+.num u{font-size:11px;color:var(--mute);text-decoration:none}
+.num.free b{color:var(--red)}
+
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:auto;padding-top:4px;flex-wrap:wrap}
+.delta{font-size:13px;color:var(--mute);white-space:nowrap}
+.delta b{font-weight:500;color:var(--ink)}
+.status{font-size:12px;padding:4px 12px;border-radius:800px;border:1px solid var(--line);white-space:nowrap}
+.status.bad{background:var(--red);border-color:var(--red);color:var(--white)}
+.status.good{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.need{font-size:12px;color:var(--mute)}
+
+.gate{max-width:400px;margin:14vh auto;background:var(--white);border-radius:16px;padding:26px}
+.gate h1{font-family:Oswald,sans-serif;font-weight:500;font-size:24px;margin:14px 0 6px}
+.gate p{color:var(--mute);font-size:14px;margin:0 0 18px}
+.gate input{width:100%;font-family:inherit;font-size:15px;padding:11px 16px;border:1px solid var(--line);
+  border-radius:800px;background:var(--cream);color:var(--ink);margin-bottom:12px}
+.gate .btn-red{width:100%;padding:12px}
+.err{color:var(--red);font-size:13px;min-height:19px;margin-top:8px}
+.note{color:var(--mute);font-size:13px;margin-top:26px;line-height:1.6}
+.loading{color:var(--mute);padding:40px 0;text-align:center}
+.hidden{display:none !important}
+
+@media (max-width:900px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:1fr}
+  .top h1{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <div class="ball"><i></i><i></i><i></i></div>
+  <h1>Дашборд стендапов</h1>
+  <p>Введи код доступа — он нужен один раз, дальше страница запомнит его на этом устройстве.</p>
+  <input id="gate-key" type="password" placeholder="Код доступа" autocomplete="current-password">
+  <button class="btn btn-red" id="gate-go">Войти</button>
+  <div class="err" id="gate-err"></div>
+</div>
+
+<div class="wrap hidden" id="app">
+  <div class="top">
+    <div class="ball"><i></i><i></i><i></i></div>
+    <div>
+      <h1>Дашборд стендапов</h1>
+      <div class="sub" id="updated">загружаем…</div>
+    </div>
+    <div class="right"><button class="btn" id="reload">Обновить</button></div>
+  </div>
+
+  <div class="controls">
+    <div class="field">
+      <label for="city">Город</label>
+      <select id="city"></select>
+    </div>
+    <div class="field">
+      <label>Показать</label>
+      <div class="chips" id="filters"></div>
+    </div>
+  </div>
+
+  <div id="tiles"></div>
+  <div id="content"><div class="loading">Загружаем данные…</div></div>
+
+  <p class="note">
+    Продажи берутся напрямую из виджетов Яндекс.Афиши в момент открытия страницы и обновляются
+    не чаще раза в 10 минут. События без подключённого виджета показывают последние цифры,
+    внесённые в таблицу вручную. «За неделю» считается по колонкам таблицы «STAND UP 2026».
+  </p>
+</div>
+
+<script>
+/* ═════════ НАСТРОЙКИ ═════════ */
+
+// Сюда вставить адрес веб-приложения Apps Script (заканчивается на /exec)
+const API_URL = 'https://script.google.com/macros/s/AKfycbwh275ACifyit43FRrbdXh0dBbur7Lh3k9hO7Xe47HvAlGR_OZFhnAFQXOkbOceRkI/exec';
+
+/* ═════════ Дальше менять не нужно ═════════ */
+
+const state = { данные: null, город: 'Все города', фильтр: 'все' };
+
+const ФИЛЬТРЫ = [
+  { код: 'все',      имя: 'Все события' },
+  { код: 'внимание', имя: 'Требуют внимания' },
+  { код: 'месяц',    имя: 'Ближайший месяц' }
+];
+
+const gate = document.getElementById('gate');
+const app  = document.getElementById('app');
+
+function savedKey(){ try { return localStorage.getItem('bb-standup-key') || ''; } catch(e){ return ''; } }
+function saveKey(k){ try { localStorage.setItem('bb-standup-key', k); } catch(e){} }
+
+document.getElementById('gate-go').addEventListener('click', tryKey);
+document.getElementById('gate-key').addEventListener('keydown', e => { if (e.key === 'Enter') tryKey(); });
+document.getElementById('reload').addEventListener('click', () => start(true));
+
+function tryKey(){
+  const k = document.getElementById('gate-key').value.trim();
+  if (!k) { document.getElementById('gate-err').textContent = 'Введи код'; return; }
+  saveKey(k); start();
+}
+function openGate(msg){
+  gate.classList.remove('hidden'); app.classList.add('hidden');
+  document.getElementById('gate-err').textContent = msg || '';
+}
+
+async function start(свежие){
+  gate.classList.add('hidden'); app.classList.remove('hidden');
+  document.getElementById('content').innerHTML = '<div class="loading">Загружаем данные…</div>';
+
+  if (!API_URL) { openGate('Адрес API не вписан в страницу'); return; }
+
+  try {
+    let url = API_URL + '?key=' + encodeURIComponent(savedKey());
+    if (свежие) url += '&свежие=1';
+    const res  = await fetch(url);
+    const json = await res.json();
+
+    if (!json.ok) { openGate(json.error || 'Не получилось получить данные'); return; }
+
+    state.данные = json;
+    document.getElementById('updated').textContent =
+      'обновлено ' + new Date(json.обновлено).toLocaleString('ru-RU',
+        { day:'numeric', month:'long', hour:'2-digit', minute:'2-digit' });
+
+    строитьФильтры();
+    рисовать();
+  } catch (e) {
+    document.getElementById('content').innerHTML =
+      '<div class="loading">Не получилось загрузить данные. ' + e + '</div>';
+  }
+}
+
+/* ── прогноз ──
+   Темп берём из прибавки за прошлую неделю. Если до события далеко,
+   низкий процент — это норма, поэтому смотрим не на факт, а на то,
+   сколько будет продано к дате при нынешнем темпе. */
+function прогноз(с){
+  if (с.всего === null || с.продано === null) return null;
+  if (с.осталось === 0) return { доля: 1, аншлаг: true };
+  if (с.заНеделю === null || с.днейДо === null) return null;
+
+  const вДень = Math.max(0, с.заНеделю) / 7;
+  const итог  = с.продано + вДень * с.днейДо;
+  return { доля: итог / с.всего, вДень, аншлаг: false };
+}
+
+/* сколько надо продавать в день, чтобы закрыть зал к дате */
+function нужноВДень(с){
+  if (с.осталось === null || !с.днейДо || с.днейДо <= 0) return null;
+  return с.осталось / с.днейДо;
+}
+
+function статус(с){
+  const п = прогноз(с);
+  if (с.всего && с.осталось === 0) return { класс:'good', текст:'аншлаг' };
+  if (с.безДанных)                 return { класс:'', текст:'продажи не заведены' };
+  if (с.всего === null)            return { класс:'', текст:'нет данных' };
+  if (!п)                          return { класс:'', текст:'темп неизвестен' };
+  if (п.доля >= 0.9)               return { класс:'good', текст:'в графике' };
+  if (п.доля >= 0.7)               return { класс:'', текст:'средний темп' };
+  return { класс:'bad', текст:'продаётся медленно' };
+}
+
+function тревожное(с){
+  if (с.безДанных) return false;
+  const ст = статус(с);
+  return ст.класс === 'bad' || (с.днейДо !== null && с.днейДо <= 14 && (с.процент || 0) < 60);
+}
+
+/* ── отбор ── */
+function отобранные(){
+  let список = (state.данные.события || []).slice();
+
+  if (state.город !== 'Все города') список = список.filter(с => с.город === state.город);
+  if (state.фильтр === 'внимание')  список = список.filter(тревожное);
+  if (state.фильтр === 'месяц')     список = список.filter(с => с.днейДо !== null && с.днейДо <= 31);
+
+  return список;
+}
+
+/* ── управление ── */
+function строитьФильтры(){
+  const города = ['Все города'].concat(
+    Array.from(new Set((state.данные.события || []).map(с => с.город).filter(Boolean))).sort()
+  );
+  const sel = document.getElementById('city');
+  sel.innerHTML = города.map(г => '<option>' + экран(г) + '</option>').join('');
+  sel.value = state.город;
+  sel.onchange = () => { state.город = sel.value; рисовать(); };
+
+  const box = document.getElementById('filters');
+  box.innerHTML = ФИЛЬТРЫ.map(ф =>
+    '<button class="chip" data-f="' + ф.код + '" aria-pressed="' +
+    (state.фильтр === ф.код) + '">' + ф.имя + '</button>').join('');
+  box.querySelectorAll('.chip').forEach(b => {
+    b.onclick = () => { state.фильтр = b.dataset.f; строитьФильтры(); рисовать(); };
+  });
+}
+
+/* ── отрисовка ── */
+function рисовать(){
+  const список = отобранные();
+  рисоватьПлитки(список);
+
+  const content = document.getElementById('content');
+  if (!список.length) {
+    content.innerHTML = '<div class="loading">Ничего не нашлось. Попробуй другой фильтр.</div>';
+    return;
+  }
+
+  const группы = [
+    { имя:'Ближайшие две недели', от:0,  до:14 },
+    { имя:'Через две недели — месяц', от:15, до:31 },
+    { имя:'Дальше', от:32, до:100000 }
+  ];
+
+  let html = '';
+  группы.forEach(г => {
+    const свои = список.filter(с => с.днейДо !== null && с.днейДо >= г.от && с.днейДо <= г.до);
+    if (!свои.length) return;
+    html += '<div class="groupname">' + г.имя + ' <s></s></div><div class="cards">' +
+            свои.map(карточка).join('') + '</div>';
+  });
+
+  const безДаты = список.filter(с => с.днейДо === null);
+  if (безДаты.length) {
+    html += '<div class="groupname">Без даты <s></s></div><div class="cards">' +
+            безДаты.map(карточка).join('') + '</div>';
+  }
+
+  content.innerHTML = html;
+}
+
+function рисоватьПлитки(список){
+  const свсего   = список.reduce((s,с) => s + (с.всего    || 0), 0);
+  const спродано = список.reduce((s,с) => s + (с.продано  || 0), 0);
+  const состалось= список.reduce((s,с) => s + (с.осталось || 0), 0);
+  const занеделю = список.reduce((s,с) => s + (с.заНеделю > 0 ? с.заНеделю : 0), 0);
+  const тревога  = список.filter(тревожное).length;
+  const доля     = свсего ? Math.round(спродано / свсего * 100) : 0;
+
+  document.getElementById('tiles').innerHTML =
+    '<div class="tiles">' +
+    плитка('Событий в продаже', список.length, '') +
+    плитка('Билетов продано', чис(спродано), доля + '% от ' + чис(свсего)) +
+    плитка('Осталось мест', чис(состалось), '') +
+    плитка('Продано за неделю', '+' + чис(занеделю), '') +
+    плитка('Требуют внимания', тревога, тревога ? 'медленные продажи' : 'всё в графике', тревога > 0) +
+    '</div>';
+}
+
+function плитка(имя, значение, подпись, тревога){
+  return '<div class="tile' + (тревога ? ' alarm' : '') + '">' +
+         '<div class="name">' + имя + '</div>' +
+         '<div class="val">' + значение + '</div>' +
+         (подпись ? '<div class="per">' + подпись + '</div>' : '') +
+         '</div>';
+}
+
+function карточка(с){
+  const ст = статус(с);
+  const п  = прогноз(с);
+  const нужно = нужноВДень(с);
+
+  const процент = с.процент === null ? 0 : с.процент;
+  const полнаяПолоса = с.осталось === 0;
+
+  let дельта = '';
+  if (с.безДанных)              дельта = 'продаж пока нет';
+  else if (с.заНеделю === null) дельта = 'за неделю — нет данных';
+  else if (с.заНеделю > 0)      дельта = 'за неделю <b>+' + с.заНеделю + '</b>';
+  else if (с.заНеделю === 0)    дельта = 'за неделю <b>без движения</b>';
+  else                          дельта = 'за неделю <b>' + с.заНеделю + '</b>';
+
+  let подсказка = '';
+  if (!полнаяПолоса && !с.безДанных && нужно !== null) {
+    подсказка = 'чтобы закрыть зал — ' + нужно.toFixed(1) + ' билета в день';
+    if (п && !п.аншлаг) подсказка += ', сейчас ' + п.вДень.toFixed(1);
+  }
+
+  const место = [с.город, с.площадка].filter(Boolean).join(' · ');
+
+  return '<div class="card">' +
+    '<div class="when">' +
+      '<span class="date">' + датаРус(с.дата) + (с.время ? ', ' + экран(с.время) : '') + '</span>' +
+      '<span class="left' + (с.днейДо !== null && с.днейДо <= 14 ? ' soon' : '') + '">' +
+        дниСлово(с.днейДо) + '</span>' +
+    '</div>' +
+    '<h3>' + экран(с.артист) + '</h3>' +
+    (место ? '<div class="place">' + экран(место) + '</div>' : '') +
+    '<div class="bar' + (полнаяПолоса ? ' full' : '') + '"><span style="width:' +
+      Math.min(100, процент) + '%"></span></div>' +
+    '<div class="nums">' +
+      число(с.продано, 'продано') +
+      число(с.осталось, 'свободно', 'free') +
+      число(с.процент === null ? null : с.процент + '%', 'выкуп') +
+      число(с.всего, 'всего мест') +
+    '</div>' +
+    '<div class="foot">' +
+      '<span class="delta">' + дельта + '</span>' +
+      '<span class="status ' + ст.класс + '">' + ст.текст + '</span>' +
+    '</div>' +
+    (подсказка ? '<div class="need">' + подсказка + '</div>' : '') +
+  '</div>';
+}
+
+function число(значение, подпись, класс){
+  const текст = (значение === null || значение === undefined) ? '—' :
+                (typeof значение === 'number' ? чис(значение) : значение);
+  return '<span class="num ' + (класс || '') + '"><b>' + текст + '</b><u>' + подпись + '</u></span>';
+}
+
+/* ── мелочи ── */
+const МЕСЯЦЫ = ['января','февраля','марта','апреля','мая','июня',
+                'июля','августа','сентября','октября','ноября','декабря'];
+const ДНИ = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+
+function датаРус(iso){
+  const ч = String(iso || '').split('-');
+  if (ч.length !== 3) return экран(iso);
+  const d = new Date(+ч[0], +ч[1] - 1, +ч[2]);
+  return +ч[2] + ' ' + МЕСЯЦЫ[+ч[1] - 1] + ', ' + ДНИ[d.getDay()];
+}
+
+function дниСлово(n){
+  if (n === null || n === undefined) return '';
+  if (n === 0) return 'сегодня';
+  if (n === 1) return 'завтра';
+  const о100 = n % 100, о10 = n % 10;
+  let слово = 'дней';
+  if (о100 < 11 || о100 > 14) {
+    if (о10 === 1) слово = 'день';
+    else if (о10 >= 2 && о10 <= 4) слово = 'дня';
+  }
+  return 'через ' + n + ' ' + слово;
+}
+
+function чис(n){
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function экран(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── старт ── */
+if (savedKey()) start(); else openGate();
+</script>
+</body>
+</html>
