@@ -86,10 +86,6 @@ select{font-family:inherit;font-size:14px;padding:8px 12px;border:1px solid var(
 .status.bad{background:var(--red);border-color:var(--red);color:var(--white)}
 .status.good{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .need{font-size:12px;color:var(--mute)}
-.src{font-size:11px;color:var(--mute);display:flex;align-items:center;gap:6px}
-.src i{width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block}
-.src.live i{background:var(--red)}
-.src.live{color:var(--ink)}
 
 .gate{max-width:400px;margin:14vh auto;background:var(--white);border-radius:16px;padding:26px}
 .gate h1{font-family:Oswald,sans-serif;font-weight:500;font-size:24px;margin:14px 0 6px}
@@ -146,9 +142,7 @@ select{font-family:inherit;font-size:14px;padding:8px 12px;border:1px solid var(
   <div id="content"><div class="loading">Загружаем данные…</div></div>
 
   <p class="note">
-    Продажи берутся напрямую из виджетов Яндекс.Афиши в момент открытия страницы и обновляются
-    не чаще раза в 10 минут. События без подключённого виджета показывают последние цифры,
-    внесённые в таблицу вручную. «За неделю» считается по колонкам таблицы «STAND UP 2026».
+    Данные обновляются автоматически, не чаще раза в 10 минут. Кнопка «Обновить» забирает самые свежие цифры.
   </p>
 </div>
 
@@ -386,8 +380,6 @@ function карточка(с){
       '<span class="status ' + ст.класс + '">' + ст.текст + '</span>' +
     '</div>' +
     (подсказка ? '<div class="need">' + подсказка + '</div>' : '') +
-    '<div class="src' + (с.живые ? ' live' : '') + '"><i></i>' +
-      (с.живые ? 'живые данные Яндекс.Афиши' : 'из таблицы — вносится вручную') + '</div>' +
   '</div>';
 }
 
